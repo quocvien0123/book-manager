@@ -36,4 +36,4 @@ app.use((req, res, next) => {
 app.use('/', require('./routes/books'));
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`Server chạy tại cổng ${PORT}`));
+app.listen(PORT, '0.0.0.0', () => console.log(`Server chạy tại cổng ${PORT}`));
