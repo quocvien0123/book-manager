@@ -15,7 +15,14 @@ app.use(express.urlencoded({ extended: true }));
 
 
 // ===== [DATABASE] =====
-
+const personal = require('./config/personal');
+app.use((req, res, next) => {
+  res.locals.hoTen = personal.hoTen;
+  res.locals.mssv = personal.mssv;
+  res.locals.vat = personal.vat;
+  next();
+});
+app.use('/', require('./routes/books'));
 
 
 const PORT = process.env.PORT || 3000;
