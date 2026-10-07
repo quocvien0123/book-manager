@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 
+// Tắt tạo index/collection tự động vì user đọc/ghi không có quyền đó
 const opts = {
 	autoIndex: false,
 	autoCreate: false,
