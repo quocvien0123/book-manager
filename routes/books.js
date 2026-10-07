@@ -3,7 +3,7 @@ const { BookRead, BookWrite } = require('../models/book');
 const { prefix, vat } = require('../config/personal');
 
 async function renderHome(res, extra = {}, status = 200) {
-  const books = await BookRead.find().sort({ createdAt: -1 }).lean(); // → user ĐỌC
+  const books = await BookRead.find().sort({ createdAt: -1 }).lean(); 
   res.status(status).render('home', { books, prefix, vat, ...extra });
 }
 
@@ -24,7 +24,6 @@ router.post('/books', async (req, res) => {
     const author = (req.body.author || '').trim();
     const price = Number(req.body.price);
 
-    // Bộ lọc mã sản phẩm: bắt buộc có tiền tố = 3 số cuối MSSV
     if (!code.startsWith(prefix)) {
       return renderHome(res, { error: `Mã sản phẩm phải bắt đầu bằng "${prefix}"`, form: req.body }, 400);
     }
@@ -32,10 +31,9 @@ router.post('/books', async (req, res) => {
       return renderHome(res, { error: 'Dữ liệu không hợp lệ', form: req.body }, 400);
     }
 
-    // Tính giá sau thuế TRƯỚC khi lưu
     const priceAfterTax = Math.round(price * (1 + vat / 100));
 
-    await BookWrite.create({ code, title, author, price, vat, priceAfterTax }); // → user GHI
+    await BookWrite.create({ code, title, author, price, vat, priceAfterTax }); 
     res.redirect('/books');
   } catch (e) {
     res.status(500).send('Lỗi ghi dữ liệu: ' + e.message);

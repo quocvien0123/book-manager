@@ -7,11 +7,11 @@ module.exports = session({
   resave: false,
   saveUninitialized: false,
   store: MongoStore.create({
-    mongoUrl: process.env.MONGO_URI_WRITE,  // user ghi (có quyền trên collection sessions)
+    mongoUrl: process.env.MONGO_URI_WRITE,  
     dbName: process.env.MONGO_DB_NAME,
     collectionName: 'sessions',
-    ttl: 60 * 60 * 24 * 7,                  // 7 ngày
-    autoRemove: 'disabled',                 // tài khoản MongoDB không có quyền createIndex
+    ttl: 60 * 60 * 24 * 7,                 
+    autoRemove: 'disabled',                 
   }),
   cookie: {
     httpOnly: true,

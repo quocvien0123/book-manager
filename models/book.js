@@ -14,6 +14,6 @@ const bookSchema = new mongoose.Schema(
 );
 
 module.exports = {
-  BookRead: readConn.model('Book', bookSchema, 'books'),    // chỉ dùng find
-  BookWrite: writeConn.model('Book', bookSchema, 'books'),  // chỉ dùng create
+  BookRead: readConn.model('Book', bookSchema, 'books'),   
+  BookWrite: writeConn.model('Book', bookSchema, 'books'),  
 };
