@@ -7,13 +7,15 @@ async function renderHome(res, extra = {}, status = 200) {
   res.status(status).render('home', { books, prefix, vat, ...extra });
 }
 
-router.get('/', async (req, res) => {
+router.get('/books', async (req, res) => {
   try {
     await renderHome(res);
   } catch (e) {
     res.status(500).send('Lỗi đọc dữ liệu: ' + e.message);
   }
 });
+
+router.get('/', (req, res) => res.redirect('/books'));
 
 router.post('/books', async (req, res) => {
   try {
@@ -34,7 +36,7 @@ router.post('/books', async (req, res) => {
     const priceAfterTax = Math.round(price * (1 + vat / 100));
 
     await BookWrite.create({ code, title, author, price, vat, priceAfterTax }); // → user GHI
-    res.redirect('/');
+    res.redirect('/books');
   } catch (e) {
     res.status(500).send('Lỗi ghi dữ liệu: ' + e.message);
   }
